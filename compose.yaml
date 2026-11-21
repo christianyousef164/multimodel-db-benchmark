@@ -13,6 +13,18 @@ services:
       - arangodb-data:/var/lib/arangodb3
       - arangodb-apps:/var/lib/arangodb3-apps
 
+  surrealdb:
+    image: surrealdb/surrealdb:v4.0.1
+    container_name: multimodel-surrealdb
+    ports:
+      - "127.0.0.1:8001:8000"
+    env_file:
+      - .env
+    command: ["start", "surrealkv:/data/app.db"]
+    volumes:
+      - surrealdb-data:/data
+
 volumes:
   arangodb-data:
   arangodb-apps:
+  surrealdb-data:
