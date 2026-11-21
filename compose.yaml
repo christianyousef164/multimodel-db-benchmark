@@ -1,0 +1,18 @@
+
+name: multimodel-db-benchmark
+
+services:
+  arangodb:
+    image: arangodb:3.12
+    container_name: multimodel-arangodb
+    ports:
+      - "127.0.0.1:8529:8529"
+    environment:
+      ARANGO_ROOT_PASSWORD: ${ARANGO_ROOT_PASSWORD:?Missing password}
+    volumes:
+      - arangodb-data:/var/lib/arangodb3
+      - arangodb-apps:/var/lib/arangodb3-apps
+
+volumes:
+  arangodb-data:
+  arangodb-apps:
