@@ -24,7 +24,25 @@ services:
     volumes:
       - surrealdb-data:/data
 
+  postgres:
+    image: postgres:16
+    container_name: multimodel-postgres
+    ports:
+      - "127.0.0.1:5433:5432"
+    environment:
+      POSTGRES_USER: benchmark
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Missing PostgreSQL password}
+      POSTGRES_DB: multimodel
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U benchmark -d multimodel"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
 volumes:
   arangodb-data:
   arangodb-apps:
   surrealdb-data:
+  postgres-data:
