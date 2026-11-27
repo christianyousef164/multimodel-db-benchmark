@@ -1,2 +1,12 @@
 
 .env
+
+.venv/
+__pycache__/
+
+data/
+
+# Local datasets and downloaded archives
+data/
+GDELT_Project_Downloads.zip
+*:Zone.Identifier
